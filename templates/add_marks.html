@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Enter Marks</h2>
+<div class="form-box">
+  <form method="POST">
+    {% for subject in subjects %}
+    <label>{{ subject.name }} (Max: {{ subject.max_marks }})</label>
+    <input type="number" name="marks_{{ subject.id }}"
+           min="0" max="{{ subject.max_marks }}" placeholder="Enter marks" required>
+    {% endfor %}
+    <button type="submit" class="btn btn-green" style="width:100%;margin-top:10px">Save Marks</button>
+  </form>
+</div>
+{% endblock %}

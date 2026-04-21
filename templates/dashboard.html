@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Dashboard - {{ total }} Students Enrolled</h2>
+
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
+  <a href="/add_student" class="btn btn-blue">+ Add Student</a>
+  <form action="/search" method="GET" style="display:flex; gap:8px;">
+    <input type="text" name="q" placeholder="Search by name or roll no"
+           style="padding:8px 12px; border:1px solid #ddd; border-radius:6px; font-size:13px; width:240px;">
+    <button type="submit" class="btn btn-blue">Search</button>
+    <a href="/dashboard" class="btn" style="background:#eee; color:#333;">Clear</a>
+  </form>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Roll No</th><th>Name</th><th>Branch</th><th>Year</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in students %}
+    <tr>
+      <td>{{ s.roll_no }}</td>
+      <td>{{ s.name }}</td>
+      <td>{{ s.branch }}</td>
+      <td>{{ s.year }}</td>
+      <td style="display:flex; gap:6px; flex-wrap:wrap;">
+        <a href="/marks/{{ s.id }}" class="btn btn-green">Enter Marks</a>
+        <a href="/result/{{ s.id }}" class="btn btn-blue">View Result</a>
+        <a href="/delete/{{ s.id }}" class="btn btn-red"
+           onclick="return confirm('Delete {{ s.name }}? This cannot be undone.')">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+    {% if students|length == 0 %}
+    <tr><td colspan="5" style="text-align:center; color:#999; padding:20px;">No students found.</td></tr>
+    {% endif %}
+  </tbody>
+</table>
+{% endblock %}

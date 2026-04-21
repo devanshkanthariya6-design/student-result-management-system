@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Result Card - {{ student.name }}</h2>
+<p style="margin-bottom:16px;color:#666">Roll No: {{ student.roll_no }}</p>
+<table>
+  <thead><tr><th>Subject</th><th>Marks Obtained</th><th>Max Marks</th><th>Status</th></tr></thead>
+  <tbody>
+    {% for row in rows %}
+    <tr>
+      <td>{{ row.subject }}</td>
+      <td>{{ row.marks_obtained }}</td>
+      <td>{{ row.max_marks }}</td>
+      <td>
+        {% if row.marks_obtained >= 35 %}
+          <span class="badge-pass">Pass</span>
+        {% else %}
+          <span class="badge-fail">Fail</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div style="margin-top:20px;background:white;padding:20px;border-radius:10px">
+  <p>Total Marks: <strong>{{ total }} / {{ max_total }}</strong></p>
+  <p>Percentage: <strong>{{ percentage }}%</strong></p>
+  <p>Grade: <strong>{{ grade }}</strong></p>
+  <p>Result: <strong>
+    {% if passed %}<span class="badge-pass">PASS</span>
+    {% else %}<span class="badge-fail">FAIL</span>{% endif %}
+  </strong></p>
+</div>
+<button onclick="window.print()" class="btn btn-blue" style="margin-top:16px">Print Result</button>
+{% endblock %}

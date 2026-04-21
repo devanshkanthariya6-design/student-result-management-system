@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <title>Student Result Management System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav>
+    <div class="logo">Student Result Management System</div>
+    <div class="nav-links">
+      <a href="/dashboard">Dashboard</a>
+      <a href="/add_student">Add Student</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </nav>
+  <div class="container">
+    {% block content %}{% endblock %} 
+  </div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body></html>
